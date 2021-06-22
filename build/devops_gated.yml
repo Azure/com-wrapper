@@ -218,7 +218,7 @@ jobs:
   - task: VSBuild@1
     displayName: 'Build traceabilitytool only'
     inputs:
-      solution: 'build\c_util.sln'
+      solution: 'build\com_wrapper.sln'
       platform: x64
       configuration: RelWithDebInfo
       msbuildArgs: '/t:restore /t:traceabilitytool'
