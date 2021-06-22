@@ -70,6 +70,11 @@ if ((NOT TARGET umock_c) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/umock-c/CMak
     include_directories(${UMOCK_C_INC_FOLDER})
 endif()
 
+if ((NOT TARGET c_pal) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/c-pal/CMakeLists.txt))
+    add_subdirectory(deps/c-pal)
+    include_directories(${C_PAL_INC_FOLDER})
+endif()
+
 set(run_e2e_tests ${original_run_e2e_tests})
 set(run_int_tests ${original_run_int_tests})
 set(run_perf_tests ${original_run_perf_tests})

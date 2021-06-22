@@ -26,4 +26,4 @@ real_test_object_renames.h
 test_interface.h
 )
 
-build_test_artifacts(${theseTestsName} "tests/com_wrapper" ADDITIONAL_LIBS c_util com_wrapper c_pal_reals)
+build_test_artifacts(${theseTestsName} "tests/com_wrapper" ADDITIONAL_LIBS c_pal com_wrapper c_pal_reals)

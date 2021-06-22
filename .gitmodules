@@ -16,3 +16,6 @@
 [submodule "deps/macro-utils-c"]
 	path = deps/macro-utils-c
 	url = https://github.com/Azure/macro-utils-c
+[submodule "deps/c-pal"]
+	path = deps/c-pal
+	url = https://github.com/Azure/c-pal
