@@ -1,0 +1,55 @@
+//
+// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+//
+
+import "unknwn.idl";
+
+//=====================================================================================================================
+// Forward declarations
+interface ITestInterface;
+interface ITestInterface2;
+interface ITestInterfaceNotImpl;
+
+//=====================================================================================================================
+// ITestInterface
+//=====================================================================================================================
+[
+    uuid(42CAEA39-1A18-4199-B537-D9EF61C26D6E),
+    version(1.0),
+    local
+]
+interface ITestInterface : IUnknown
+{
+    long TestMethodWithReturnNoArgs();
+    void TestMethodWithoutReturnNoArgs();
+    void TestMethodWithoutReturnWith2Args(int a, LPCSTR b);
+    long TestMethodWithReturnWith2Args(int a, LPCSTR b);
+};
+
+//=====================================================================================================================
+// ITestInterface2
+//=====================================================================================================================
+[
+    uuid(1828CCF9-0AE4-493D-A0A7-51C56C6226E9),
+    version(1.0),
+    local
+]
+interface ITestInterface2 : IUnknown
+{
+    int TestMethodInterface2(int x);
+};
+
+//=====================================================================================================================
+// ITestInterfaceNotImpl
+//=====================================================================================================================
+[
+    uuid(B595A7F7-0AFD-4AF5-A2B0-5C1A7200C519),
+    version(1.0),
+    local
+]
+interface ITestInterfaceNotImpl : IUnknown
+{
+    void TestMethodNotImplemented();
+};
+

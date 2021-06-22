@@ -1,0 +1,8 @@
+// Copyright (c) Microsoft. All rights reserved.
+
+#define test_object_create real_test_object_create
+#define test_object_destroy real_test_object_destroy
+#define test_object_TestMethodWithReturnNoArgs real_test_object_TestMethodWithReturnNoArgs
+#define test_object_TestMethodWithoutReturnNoArgs real_test_object_TestMethodWithoutReturnNoArgs
+#define test_object_TestMethodWithoutReturnWith2Args real_test_object_TestMethodWithoutReturnWith2Args
+#define test_object_TestMethodWithReturnWith2Args real_test_object_TestMethodWithReturnWith2Args
