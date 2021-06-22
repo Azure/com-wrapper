@@ -1,4 +1,5 @@
 // Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #define test_object_create real_test_object_create
 #define test_object_destroy real_test_object_destroy
