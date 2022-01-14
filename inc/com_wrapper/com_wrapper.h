@@ -23,7 +23,7 @@
 #include "c_pal/gballoc_hl_redirect.h"
 #include "c_pal/interlocked.h"
 #include "c_pal/refcount.h"
-#include "c_pal/string_utils.h"
+#include "c_pal/uuid.h"
 
 #include "umock_c/umock_c_prod.h"
 
