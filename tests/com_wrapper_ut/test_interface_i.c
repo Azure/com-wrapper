@@ -20,11 +20,6 @@
 
 #pragma warning( disable: 4049 )  /* more than 64k source lines */
 
-
-#ifdef __cplusplus
-extern "C"{
-#endif 
-
 #include "windows.h"
 
 #ifdef _MIDL_USE_GUIDDEF_
@@ -74,10 +69,6 @@ MIDL_DEFINE_GUID(IID, IID_ITestInterface2,0x1828CCF9,0x0AE4,0x493D,0xA0,0xA7,0x5
 MIDL_DEFINE_GUID(IID, IID_ITestInterfaceNotImpl,0xB595A7F7,0x0AFD,0x4AF5,0xA2,0xB0,0x5C,0x1A,0x72,0x00,0xC5,0x19);
 
 #undef MIDL_DEFINE_GUID
-
-#ifdef __cplusplus
-}
-#endif
 
 
 

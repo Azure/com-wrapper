@@ -10,10 +10,6 @@
 #include "Unknwnbase.h"
 #include "test_interface.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #define TEST_OBJECT_2_HANDLE_INTERFACES \
     COM_WRAPPER_INTERFACE(IUnknown, \
         COM_WRAPPER_IUNKNOWN_APIS() \
@@ -31,9 +27,5 @@ extern "C" {
     ) \
 
 DECLARE_COM_WRAPPER_OBJECT(TEST_OBJECT_2_HANDLE, TEST_OBJECT_2_HANDLE_INTERFACES);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* TEST_OBJECT_2_WRAPPER_H */

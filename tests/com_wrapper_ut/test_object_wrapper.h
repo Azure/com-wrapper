@@ -11,10 +11,6 @@
 #include "windows.h"
 #include "test_interface.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #define TEST_OBJECT_HANDLE_INTERFACES \
     COM_WRAPPER_INTERFACE(IUnknown, \
         COM_WRAPPER_IUNKNOWN_APIS() \
@@ -29,9 +25,5 @@ extern "C" {
 
 /* Tests_SRS_COM_WRAPPER_01_027: [ DEFINE_COM_WRAPPER_OBJECT shall generate constructor prototypes for the COM object for each implemented interface. ]*/
 DECLARE_COM_WRAPPER_OBJECT(TEST_OBJECT_HANDLE, TEST_OBJECT_HANDLE_INTERFACES);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* TEST_OBJECT_WRAPPER_H */
