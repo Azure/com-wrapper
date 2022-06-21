@@ -1,13 +1,8 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-#ifdef __cplusplus
-#include <cstdlib>
-#include <cstddef>
-#else
 #include <stdlib.h>
 #include <stddef.h>
-#endif
 
 #include "macro_utils/macro_utils.h"
 
@@ -50,18 +45,10 @@ static void my_gballoc_free(void* ptr)
 #include "test_object_wrapper.h"
 #include "test_object_2_wrapper.h"
 
-// C++ and C do not agree on the same IID type, C++ uses &, C uses *
-#ifdef __cplusplus
-static REFIID iid_IUnknown = IID_IUnknown;
-static REFIID iid_ITestInterface = IID_ITestInterface;
-static REFIID iid_ITestInterface2 = IID_ITestInterface2;
-static REFIID iid_ITestInterfaceNotImpl = IID_ITestInterfaceNotImpl;
-#else
 static REFIID iid_IUnknown = &IID_IUnknown;
 static REFIID iid_ITestInterface = &IID_ITestInterface;
 static REFIID iid_ITestInterface2 = &IID_ITestInterface2;
 static REFIID iid_ITestInterfaceNotImpl = &IID_ITestInterfaceNotImpl;
-#endif
 
 typedef struct TEST_OBJECT_TAG
 {
@@ -265,7 +252,6 @@ TEST_FUNCTION(QueryInterface_with_NULL_This_fails)
     (void)test_object_ITestInterface->lpVtbl->Release(test_object_ITestInterface);
 }
 
-#ifndef __cplusplus
 /* Tests_SRS_COM_WRAPPER_01_029: [ If riid is NULL, QueryInterface shall fail and return E_POINTER. ]*/
 TEST_FUNCTION(QueryInterface_with_NULL_riid_fails)
 {
@@ -286,7 +272,6 @@ TEST_FUNCTION(QueryInterface_with_NULL_riid_fails)
     // cleanup
     (void)test_object_ITestInterface->lpVtbl->Release(test_object_ITestInterface);
 }
-#endif
 
 /* Tests_SRS_COM_WRAPPER_01_010: [ If ppvObject is NULL, QueryInterface shall fail and return E_POINTER. ]*/
 TEST_FUNCTION(QueryInterface_with_NULL_ppvObject_fails)
