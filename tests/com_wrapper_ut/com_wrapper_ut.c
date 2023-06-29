@@ -21,7 +21,7 @@ static void my_gballoc_free(void* ptr)
 #include "umock_c/umock_c.h"
 #include "umock_c/umocktypes.h"
 #include "umock_c/umocktypes_charptr.h"
-#include "c_logging/xlogging.h"
+#include "c_logging/logger.h"
 
 #include "c_pal/interlocked.h" /*included for mocking reasons - it will prohibit creation of mocks belonging to interlocked.h - at the moment verified through int tests - this is porting legacy code, temporary solution*/
 
