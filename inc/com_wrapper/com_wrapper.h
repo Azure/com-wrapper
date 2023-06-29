@@ -467,6 +467,7 @@ MOCKABLE_FUNCTION_WITH_CODE_END(MU_EXPAND(MU_IF(COM_WRAPPER_IS_NOT_VOID(MU_C2(EX
 // - Create functions for each interface
 /* Codes_SRS_COM_WRAPPER_01_001: [ DEFINE_COM_WRAPPER_OBJECT shall generate constructors for the COM object for each implemented interface. ]*/
 /* Codes_SRS_COM_WRAPPER_01_028: [ DEFINE_COM_WRAPPER_OBJECT shall generate all the underlying Vtbl structures needed for the COM object. ]*/
+/* Note "error C2466: cannot allocate an array of constant size 0" in the expansion of the macro denotes an unbalanced number of methods in the interface (idl) and the implementation (DEFINE_COM_WRAPPER_OBJECT). */
 #define DEFINE_COM_WRAPPER_OBJECT(wrapped_handle_type, ...) \
     TYPEDEF_COM_WRAPPER_OBJECT(wrapped_handle_type, __VA_ARGS__) \
     MU_FOR_EACH_1_KEEP_1(COM_WRAPPER_DEFINE_VTBL, wrapped_handle_type, __VA_ARGS__) \
