@@ -6,17 +6,6 @@
 
 #include "macro_utils/macro_utils.h"
 
-#include "real_gballoc_ll.h"
-static void* my_gballoc_malloc(size_t size)
-{
-    return real_gballoc_ll_malloc(size);
-}
-
-static void my_gballoc_free(void* ptr)
-{
-     real_gballoc_ll_free(ptr);
-}
-
 #include "testrunnerswitcher.h"
 #include "umock_c/umock_c.h"
 #include "umock_c/umocktypes.h"
@@ -34,9 +23,7 @@ static void my_gballoc_free(void* ptr)
 
 #include "real_gballoc_hl.h"
 
-
 #include "com_wrapper/com_wrapper.h"
-
 
 #include "Unknwnbase.h"
 #include "test_interface.h"
@@ -97,10 +84,8 @@ TEST_SUITE_INITIALIZE(suite_init)
     REGISTER_UMOCK_ALIAS_TYPE(TEST_OBJECT_HANDLE, void*);
     REGISTER_UMOCK_ALIAS_TYPE(HRESULT, long);
 
+    REGISTER_GBALLOC_HL_GLOBAL_MOCK_HOOK();
     REGISTER_TEST_OBJECT_GLOBAL_MOCK_HOOK();
-
-    REGISTER_GLOBAL_MOCK_HOOK(malloc, my_gballoc_malloc);
-    REGISTER_GLOBAL_MOCK_HOOK(free, my_gballoc_free);
 }
 
 TEST_SUITE_CLEANUP(suite_cleanup)
