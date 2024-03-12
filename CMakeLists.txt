@@ -72,28 +72,6 @@ if ((WIN32) AND ("${GBALLOC_LL_TYPE}" STREQUAL "JEMALLOC"))
 
         include(deps/vcpkg/scripts/buildsystems/vcpkg.cmake)
     endif()
-
-    find_package(PkgConfig REQUIRED)
-    pkg_check_modules (JEMALLOC jemalloc)
-
-    pkg_search_module(JEMALLOC REQUIRED jemalloc)
-    include_directories(${JEMALLOC_INCLUDE_DIRS})
-
-    #this wraps the jemalloc library in a target so it can be used in the rest of the build easily
-    add_library(jemalloc INTERFACE)
-
-    # The pkg_search_module above sets the variables needed for the include and link directories
-    # we are interested to have the include directories produced by the pkg_search_module for jemalloc used so that
-    # we can find the jemalloc headers
-    # Also we need to link in our wrapper target the jemalloc static library, which lives at the location produced by
-    # the pkg_search_module in ${pkgcfg_lib_JEMALLOC_jemalloc_s}
-    # Note that PkgConfig is not geared to produce different variables pointing to different libs for different configurations
-    # so the same variable will be used both debug and release (this forces us to only generate the CMakes for one build configuration only).
-    target_link_libraries(jemalloc INTERFACE ${pkgcfg_lib_JEMALLOC_jemalloc_s})
-    target_include_directories(jemalloc INTERFACE ${JEMALLOC_INCLUDE_DIRS})
-
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /DJEMALLOC_NO_PRIVATE_NAMESPACE /D_REENTRANT /DJEMALLOC_EXPORT= /D_LIB")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /DJEMALLOC_NO_PRIVATE_NAMESPACE /D_REENTRANT /DJEMALLOC_EXPORT= /D_LIB")
 endif()
 
 if ((NOT TARGET c_build_tools) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/c-build-tools/CMakeLists.txt))
