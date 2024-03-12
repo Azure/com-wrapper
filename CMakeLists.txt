@@ -27,24 +27,6 @@ option(run_reals_check "set run_reals_check to ON to run reals check (default is
 option(use_cppunittest "set use_cppunittest to ON to build CppUnitTest tests on Windows (default is OFF)" OFF)
 option(run_traceability "run traceability tool (default is ON)" ON)
 
-if((NOT "${CMAKE_BUILD_TYPE}" STREQUAL "RelWithDebInfo") AND (NOT "${CMAKE_BUILD_TYPE}" STREQUAL "Debug"))
-    message(FATAL_ERROR "CMAKE_BUILD_TYPE must be specified and be precisely one of Debug or RelWithDebInfo")
-endif()
-
-# This is done because jemalloc is obtained from vcpkg and brought in with PkgConfig
-# PkgConfig does not support defining different variables with the libraries to be linked for different configurations
-# This forces us to only be able to generate one build configuration (either Debug or RelWithDebInfo)
-# Setting CMAKE_CONFIGURATION_TYPES is the way to limit what configurations are generated
-# so that the user gets only one configuration as option in the Visual Studio GUI
-set(CMAKE_CONFIGURATION_TYPES "${CMAKE_BUILD_TYPE}" CACHE STRING "" FORCE)
-
-if (NOT DEFINED ENV{BUILD_BINARIESDIRECTORY})
-    MESSAGE(FATAL_ERROR "cannot find BUILD_BINARIESDIRECTORY env variable which is absolutely needed. It can point to any folder where the binaries will pe placed. Here's an example: BUILD_BINARIESDIRECTORY=d:\\BUILD_BINARIESDIRECTORY")
-endif()
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG $ENV{BUILD_BINARIESDIRECTORY}/Debug)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO $ENV{BUILD_BINARIESDIRECTORY}/RelWithDebInfo)
-
 #bring in dependencies
 #do not add or build any tests of the dependencies
 set(original_run_e2e_tests ${run_e2e_tests})
