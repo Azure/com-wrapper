@@ -61,7 +61,7 @@ set(run_unittests OFF)
 set(run_traceability OFF)
 set(run_reals_check OFF)
 
-if ((WIN32) AND (${GBALLOC_LL_TYPE} STREQUAL "JEMALLOC"))
+if ((WIN32) AND ("${GBALLOC_LL_TYPE}" STREQUAL "JEMALLOC"))
     if (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/vcpkg/scripts/buildsystems/vcpkg.cmake)
         set(VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_LIST_DIR}/triplets")
         if(${fsanitize})
