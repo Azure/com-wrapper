@@ -103,6 +103,4 @@ jobs:
       filename: ctest
       arguments: '-C "${{ parameters.build_configuration }}" -V --output-on-failure'
       workingFolder: 'cmake_build'
-
-  - template: ../templates/dump_drive_usage.yml
   
