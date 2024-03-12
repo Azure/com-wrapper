@@ -19,3 +19,6 @@
 [submodule "deps/c-pal"]
 	path = deps/c-pal
 	url = https://github.com/Azure/c-pal
+[submodule "deps/vcpkg"]
+	path = deps/vcpkg
+	url = https://github.com/microsoft/vcpkg.git
