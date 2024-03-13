@@ -44,16 +44,7 @@ set(run_traceability OFF)
 set(run_reals_check OFF)
 
 if ((WIN32) AND ("${GBALLOC_LL_TYPE}" STREQUAL "JEMALLOC"))
-    if (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/vcpkg/scripts/buildsystems/vcpkg.cmake)
-        set(VCPKG_OVERLAY_TRIPLETS "${CMAKE_CURRENT_LIST_DIR}/triplets")
-        if(${fsanitize})
-            set(VCPKG_TARGET_TRIPLET "x64-windows-static-comwrapper-asan")
-        else()
-            set(VCPKG_TARGET_TRIPLET "x64-windows-static-comwrapper")
-        endif()
-
-        include(deps/vcpkg/scripts/buildsystems/vcpkg.cmake)
-    endif()
+    use_vcpkg(${CMAKE_CURRENT_LIST_DIR}/deps/vcpkg)
 endif()
 
 if ((NOT TARGET c_build_tools) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/c-build-tools/CMakeLists.txt))
