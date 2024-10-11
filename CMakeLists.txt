@@ -10,7 +10,7 @@ endif()
 #if ((NOT TARGET com_wrapper) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/com_wrapper/CMakeLists.txt))
 #    add_subdirectory(deps/com_wrapper)
 #    include_directories(deps/com_wrapper/inc)
-#endif() 
+#endif()
 
 if (TARGET com_wrapper)
     RETURN()
@@ -55,32 +55,26 @@ endif()
 
 if ((NOT TARGET macro_utils_c) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/macro-utils-c/CMakeLists.txt))
     add_subdirectory(deps/macro-utils-c)
-    include_directories(${MACRO_UTILS_INC_FOLDER})
 endif()
 
 if ((NOT TARGET c_logging) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/c-logging/CMakeLists.txt))
     add_subdirectory(deps/c-logging)
-    include_directories(deps/c-logging/v2/inc)
 endif()
 
 if ((NOT TARGET ctest) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/ctest/CMakeLists.txt))
     add_subdirectory(deps/ctest)
-    include_directories(${CTEST_INC_FOLDER})
 endif()
 
 if ((NOT TARGET testrunnerswitcher) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/c-testrunnerswitcher/CMakeLists.txt))
     add_subdirectory(deps/c-testrunnerswitcher)
-    include_directories(${TESTRUNNERSWITCHER_INC_FOLDER})
 endif()
 
 if ((NOT TARGET umock_c) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/umock-c/CMakeLists.txt))
     add_subdirectory(deps/umock-c)
-    include_directories(${UMOCK_C_INC_FOLDER})
 endif()
 
 if ((NOT TARGET c_pal) AND (EXISTS ${CMAKE_CURRENT_LIST_DIR}/deps/c-pal/CMakeLists.txt))
     add_subdirectory(deps/c-pal)
-    include_directories(${C_PAL_INC_FOLDER})
 endif()
 
 set(run_e2e_tests ${original_run_e2e_tests})
@@ -95,8 +89,13 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/inc)
 FILE(GLOB com_wrapper_md_files "devdoc/*.md")
 SOURCE_GROUP(devdoc FILES ${com_wrapper_md_files})
 
-add_library(com_wrapper INTERFACE)
+set(com_wrapper_h_files
+    ${CMAKE_CURRENT_LIST_DIR}/inc/com_wrapper/com_wrapper.h
+)
+
+add_library(com_wrapper INTERFACE ${com_wrapper_h_files})
 target_include_directories(com_wrapper INTERFACE ${CMAKE_CURRENT_LIST_DIR}/inc)
+target_link_libraries(com_wrapper INTERFACE macro_utils_c c_logging_v2 c_pal umock_c)
 
 add_subdirectory(tests)
 
