@@ -240,7 +240,6 @@ MOCKABLE_FUNCTION_WITH_CODE(STDMETHODCALLTYPE, HRESULT, MU_C4(wrapped_handle_typ
         } \
         if (i == com_wrapper->if_count) \
         { \
-            /* LogInfo("Could not find interface %" GUID_FORMAT " on handle %p of type %s implementing %s", GUID_VALUES(*riid), This, MU_TOSTRING(wrapped_handle_type), MU_TOSTRING(implementing_interface)); */ \
             result = E_NOINTERFACE; \
         } \
         else \
