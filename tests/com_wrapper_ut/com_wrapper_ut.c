@@ -196,7 +196,6 @@ TEST_FUNCTION(when_malloc_fails_create_fails)
 /* Tests_SRS_COM_WRAPPER_66_001: [ DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS shall generate constructors for the COM object for each implemented interface. ]*/
 /* Tests_SRS_COM_WRAPPER_66_002: [ DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS shall generate all the underlying Vtbl structures needed for the COM object. ]*/
 /* Tests_SRS_COM_WRAPPER_66_003: [ DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS shall use malloc_func to allocate memory for the COM wrapper object. ]*/
-/* Tests_SRS_COM_WRAPPER_66_004: [ DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS shall use free_func to free the memory associated with the COM wrapper object. ]*/
 TEST_FUNCTION(create_with_custom_allocator_uses_provided_functions)
 {
     // arrange
@@ -212,14 +211,8 @@ TEST_FUNCTION(create_with_custom_allocator_uses_provided_functions)
     ASSERT_IS_NOT_NULL(custom_interface);
     ASSERT_ARE_EQUAL(char_ptr, umock_c_get_expected_calls(), umock_c_get_actual_calls());
 
-    // verify free is called on release
-    umock_c_reset_all_calls();
-    STRICT_EXPECTED_CALL(test_object_destroy(test_object));
-    STRICT_EXPECTED_CALL(ut_custom_free(IGNORED_ARG));
-
+    // cleanup
     (void)custom_interface->lpVtbl->Release(custom_interface);
-
-    ASSERT_ARE_EQUAL(char_ptr, umock_c_get_expected_calls(), umock_c_get_actual_calls());
 }
 
 /* QueryInterface */
@@ -531,6 +524,26 @@ TEST_FUNCTION(Release_decrements_the_reference_count_to_zero_and_calls_handle_de
 
     // act
     result = test_object_ITestInterface->lpVtbl->Release(test_object_ITestInterface);
+
+    // assert
+    ASSERT_ARE_EQUAL(ULONG, 0, result);
+    ASSERT_ARE_EQUAL(char_ptr, umock_c_get_expected_calls(), umock_c_get_actual_calls());
+}
+
+/* Tests_SRS_COM_WRAPPER_66_004: [ DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS shall use free_func to free the memory associated with the COM wrapper object. ]*/
+TEST_FUNCTION(Release_with_custom_allocator_uses_custom_free)
+{
+    // arrange
+    TEST_OBJECT_HANDLE test_object = test_object_create("haga");
+    ITestInterface* custom_interface = COM_WRAPPER_CREATE(TEST_OBJECT_UT_ALLOC_HANDLE, ITestInterface, (TEST_OBJECT_UT_ALLOC_HANDLE)test_object, test_object_destroy);
+    ULONG result;
+    umock_c_reset_all_calls();
+
+    STRICT_EXPECTED_CALL(test_object_destroy(test_object));
+    STRICT_EXPECTED_CALL(ut_custom_free(IGNORED_ARG));
+
+    // act
+    result = custom_interface->lpVtbl->Release(custom_interface);
 
     // assert
     ASSERT_ARE_EQUAL(ULONG, 0, result);
