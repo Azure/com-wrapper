@@ -26,7 +26,6 @@
 #include "real_gballoc_hl.h"
 
 #include "com_wrapper/com_wrapper.h"
-
 #include "Unknwnbase.h"
 #include "test_interface.h"
 #include "test_object_2.h"
