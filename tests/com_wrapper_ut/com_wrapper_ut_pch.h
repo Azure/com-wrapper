@@ -26,12 +26,9 @@
 #include "real_gballoc_hl.h"
 
 #include "com_wrapper/com_wrapper.h"
-
 #include "Unknwnbase.h"
 #include "test_interface.h"
 #include "test_object_2.h"
 #include "real_test_object.h"
 #include "test_object_wrapper.h"
 #include "test_object_2_wrapper.h"
-#include "custom_alloc_helpers.h"
-#include "test_object_custom_alloc_wrapper.h"

@@ -4,12 +4,12 @@
 #ifndef TEST_OBJECT_CUSTOM_ALLOC_WRAPPER_H
 #define TEST_OBJECT_CUSTOM_ALLOC_WRAPPER_H
 
-#include "test_object.h"
+#include "../com_wrapper_ut/test_object.h"
 #include "com_wrapper/com_wrapper.h"
 
 #include "Unknwnbase.h"
 #include "windows.h"
-#include "test_interface.h"
+#include "../com_wrapper_ut/test_interface.h"
 
 typedef TEST_OBJECT_HANDLE TEST_OBJECT_CUSTOM_ALLOC_HANDLE;
 

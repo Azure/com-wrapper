@@ -90,8 +90,8 @@ typedef void (*COM_WRAPPER_FREE_FUNCTION)(void* ptr);
             size_t i = 0; \
             result->object_data = wrapped_handle; \
             result->destroy_func = destroy_func; \
-            result->malloc_func = (COM_WRAPPER_MALLOC_FUNCTION)(malloc_func); \
-            result->free_func = (COM_WRAPPER_FREE_FUNCTION)(free_func); \
+            result->malloc_func_ptr = (COM_WRAPPER_MALLOC_FUNCTION)(malloc_func); \
+            result->free_func_ptr = (COM_WRAPPER_FREE_FUNCTION)(free_func); \
             MU_FOR_EACH_1_KEEP_1(COM_WRAPPER_SET_IF_VTBL, wrapped_handle_type, __VA_ARGS__) \
             result->if_count = i; \
             (void)interlocked_exchange(&result->ref_count, 1); \
@@ -198,8 +198,8 @@ typedef void (*COM_WRAPPER_FREE_FUNCTION)(void* ptr);
         COM_WRAPPER_IF_LOOKUP_ENTRY if_lookup_table[MU_COUNT_ARG(__VA_ARGS__)]; \
         size_t if_count; \
         volatile_atomic int32_t ref_count; \
-        COM_WRAPPER_MALLOC_FUNCTION malloc_func; \
-        COM_WRAPPER_FREE_FUNCTION free_func; \
+        COM_WRAPPER_MALLOC_FUNCTION malloc_func_ptr; \
+        COM_WRAPPER_FREE_FUNCTION free_func_ptr; \
         MU_C2(wrapped_handle_type, _DESTROY_FUNC) destroy_func; \
         wrapped_handle_type object_data; \
     } MU_C2(wrapped_handle_type, _COM_WRAPPER); \
@@ -318,7 +318,7 @@ ULONG MU_C5(internal_, wrapped_handle_type, _, implementing_interface, _Release)
         if (result == 0) \
         { \
             com_wrapper->destroy_func(com_wrapper->object_data); \
-            com_wrapper->free_func(com_wrapper); \
+            com_wrapper->free_func_ptr(com_wrapper); \
         } \
     } \
     return result; \
