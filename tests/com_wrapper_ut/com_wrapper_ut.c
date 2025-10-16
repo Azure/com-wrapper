@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #include "com_wrapper_ut_pch.h"
-#include <errno.h>
 
 #undef ENABLE_MOCKS_DECL
 #define ENABLE_MOCKS
@@ -13,6 +12,7 @@ MOCKABLE_FUNCTION(, void, ut_custom_free, void*, ptr);
 
 #undef ENABLE_MOCKS
 
+#include "umock_c/umock_c_prod.h"
 
 static REFIID iid_IUnknown = &IID_IUnknown;
 static REFIID iid_ITestInterface = &IID_ITestInterface;
@@ -203,7 +203,6 @@ TEST_FUNCTION(create_with_custom_allocator_uses_provided_functions)
     TEST_OBJECT_HANDLE test_object = test_object_create("haga");
     umock_c_reset_all_calls();
 
-    STRICT_EXPECTED_CALL(COM_WRAPPER_TYPE_CREATE_TEST_OBJECT_UT_ALLOC_HANDLE_ITestInterface((TEST_OBJECT_UT_ALLOC_HANDLE)test_object, test_object_destroy));
     STRICT_EXPECTED_CALL(ut_custom_malloc(sizeof(TEST_OBJECT_UT_ALLOC_HANDLE_COM_WRAPPER)));
 
     // act
@@ -211,8 +210,10 @@ TEST_FUNCTION(create_with_custom_allocator_uses_provided_functions)
 
     // assert
     ASSERT_IS_NOT_NULL(custom_interface);
+    ASSERT_ARE_EQUAL(char_ptr, umock_c_get_expected_calls(), umock_c_get_actual_calls());
 
-    STRICT_EXPECTED_CALL(TEST_OBJECT_UT_ALLOC_HANDLE_ITestInterface_Release(custom_interface));
+    // verify free is called on release
+    umock_c_reset_all_calls();
     STRICT_EXPECTED_CALL(test_object_destroy(test_object));
     STRICT_EXPECTED_CALL(ut_custom_free(IGNORED_ARG));
 

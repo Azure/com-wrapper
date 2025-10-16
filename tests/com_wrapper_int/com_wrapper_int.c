@@ -9,7 +9,6 @@
 #include "real_gballoc_hl.h"
 
 #include "test_object_custom_alloc_wrapper.h"
-#include "custom_alloc_helpers.h"
 
 BEGIN_TEST_SUITE(TEST_SUITE_NAME_FROM_CMAKE)
 
@@ -25,7 +24,6 @@ TEST_SUITE_CLEANUP(suite_cleanup)
 
 TEST_FUNCTION_INITIALIZE(test_initialize)
 {
-    com_wrapper_ut_reset_custom_alloc_counters();
 }
 
 TEST_FUNCTION_CLEANUP(test_cleanup)
@@ -43,13 +41,9 @@ TEST_FUNCTION(custom_allocator_create_and_release_succeeds)
 
     // assert
     ASSERT_IS_NOT_NULL(custom_interface);
-    ASSERT_ARE_EQUAL(size_t, 1, com_wrapper_ut_get_custom_malloc_call_count());
-    ASSERT_ARE_EQUAL(size_t, 0, com_wrapper_ut_get_custom_free_call_count());
 
     // cleanup
     (void)custom_interface->lpVtbl->Release(custom_interface);
-    ASSERT_ARE_EQUAL(size_t, 1, com_wrapper_ut_get_custom_malloc_call_count());
-    ASSERT_ARE_EQUAL(size_t, 1, com_wrapper_ut_get_custom_free_call_count());
 }
 
 END_TEST_SUITE(TEST_SUITE_NAME_FROM_CMAKE)

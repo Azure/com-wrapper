@@ -8,18 +8,16 @@ ${theseTestsName}.c
 )
 
 set(${theseTestsName}_c_files
-../com_wrapper_ut/test_object.c
-custom_alloc_helpers.c
-test_object_custom_alloc_wrapper.c
-../com_wrapper_ut/test_interface_i.c
+    test_object.c
+    test_object_custom_alloc_wrapper.c
+    test_interface_i.c
 )
 
 set(${theseTestsName}_h_files
-../../inc/com_wrapper/com_wrapper.h
-../com_wrapper_ut/test_object.h
-../com_wrapper_ut/test_interface.h
-custom_alloc_helpers.h
-test_object_custom_alloc_wrapper.h
+    ../../inc/com_wrapper/com_wrapper.h
+    test_object.h
+    test_interface.h
+    test_object_custom_alloc_wrapper.h
 )
 
 build_test_artifacts(${theseTestsName} "tests/com_wrapper" ADDITIONAL_LIBS c_pal com_wrapper c_pal_reals)
