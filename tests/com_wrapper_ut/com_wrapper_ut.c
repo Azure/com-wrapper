@@ -174,6 +174,29 @@ TEST_FUNCTION(when_malloc_fails_create_fails)
     test_object_destroy(test_object);
 }
 
+/* Tests_SRS_COM_WRAPPER_66_003: [ DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS shall use malloc_func to allocate memory for the COM wrapper object. ]*/
+/* Tests_SRS_COM_WRAPPER_66_004: [ DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS shall use free_func to free the memory associated with the COM wrapper object. ]*/
+TEST_FUNCTION(create_with_custom_allocator_uses_provided_functions)
+{
+    // arrange
+    TEST_OBJECT_HANDLE test_object = test_object_create("haga");
+    com_wrapper_ut_reset_custom_alloc_counters();
+    umock_c_reset_all_calls();
+
+    // act
+    ITestInterface* custom_interface = COM_WRAPPER_CREATE(TEST_OBJECT_CUSTOM_ALLOC_HANDLE, ITestInterface, (TEST_OBJECT_CUSTOM_ALLOC_HANDLE)test_object, test_object_destroy);
+
+    // assert
+    ASSERT_IS_NOT_NULL(custom_interface);
+    ASSERT_ARE_EQUAL(size_t, 1, com_wrapper_ut_get_custom_malloc_call_count());
+    ASSERT_ARE_EQUAL(size_t, 0, com_wrapper_ut_get_custom_free_call_count());
+
+    // cleanup
+    (void)custom_interface->lpVtbl->Release(custom_interface);
+    ASSERT_ARE_EQUAL(size_t, 1, com_wrapper_ut_get_custom_malloc_call_count());
+    ASSERT_ARE_EQUAL(size_t, 1, com_wrapper_ut_get_custom_free_call_count());
+}
+
 /* QueryInterface */
 
 /* Tests_SRS_COM_WRAPPER_01_009: [ If This is NULL, QueryInterface shall fail and return E_FAIL. ]*/

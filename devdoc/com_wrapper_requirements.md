@@ -14,6 +14,9 @@
 #define DEFINE_COM_WRAPPER_OBJECT(wrapped_handle_type, ...) \
     ...
 
+#define DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS(wrapped_handle_type, malloc_func, free_func, ...) \
+    ...
+
 #define COM_WRAPPER_CREATE(wrapped_handle_type, returned_interface, wrapped_handle, wrapped_handle_destroy) \
     ...
 
@@ -128,6 +131,33 @@ Arguments:
 **SRS_COM_WRAPPER_01_001: [** `DEFINE_COM_WRAPPER_OBJECT` shall generate constructors for the COM object for each implemented interface. **]**
 
 **SRS_COM_WRAPPER_01_028: [** `DEFINE_COM_WRAPPER_OBJECT` shall generate all the underlying Vtbl structures needed for the COM object. **]**
+
+### DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS
+
+```c
+#define DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS(wrapped_handle_type, malloc_func, free_func, ...) \
+    ...
+```
+
+`DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS` defines a COM wrapper object that wraps a given handle type, implements a set of interfaces, and uses custom allocation functions for the wrapper memory.
+
+Arguments:
+
+- `wrapped_handle_type` is the handle wrapped by the COM wrapper object.
+
+- `malloc_func` is a function used to allocate memory for the COM wrapper object. It shall match the signature `void* (*)(size_t)`.
+
+- `free_func` is a function used to free memory allocated for the COM wrapper object. It shall match the signature `void (*)(void*)`.
+
+- `...` represents a list of interfaces that the COM wrapper implements. Each element in the list has to be constructed with `COM_WRAPPER_INTERFACE`.
+
+**SRS_COM_WRAPPER_66_001: [** `DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS` shall generate constructors for the COM object for each implemented interface. **]**
+
+**SRS_COM_WRAPPER_66_002: [** `DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS` shall generate all the underlying Vtbl structures needed for the COM object. **]**
+
+**SRS_COM_WRAPPER_66_003: [** `DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS` shall use `malloc_func` to allocate memory for the COM wrapper object. **]**
+
+**SRS_COM_WRAPPER_66_004: [** `DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS` shall use `free_func` to free the memory associated with the COM wrapper object. **]**
 
 ### COM_WRAPPER_CREATE
 
