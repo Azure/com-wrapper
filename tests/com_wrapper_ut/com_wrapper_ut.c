@@ -9,6 +9,29 @@ static REFIID iid_ITestInterface = &IID_ITestInterface;
 static REFIID iid_ITestInterface2 = &IID_ITestInterface2;
 static REFIID iid_ITestInterfaceNotImpl = &IID_ITestInterfaceNotImpl;
 
+MOCKABLE_FUNCTION(, void*, ut_custom_malloc, size_t, size);
+MOCKABLE_FUNCTION(, void, ut_custom_free, void*, ptr);
+
+static void* g_ut_custom_alloc_ptr;
+
+static void* ut_custom_malloc_hook(size_t size)
+{
+    g_ut_custom_alloc_ptr = real_gballoc_hl_malloc(size);
+    return g_ut_custom_alloc_ptr;
+}
+
+static void ut_custom_free_hook(void* ptr)
+{
+    ASSERT_ARE_EQUAL(void_ptr, g_ut_custom_alloc_ptr, ptr);
+    real_gballoc_hl_free(ptr);
+    g_ut_custom_alloc_ptr = NULL;
+}
+
+typedef TEST_OBJECT_HANDLE TEST_OBJECT_UT_ALLOC_HANDLE;
+
+DECLARE_COM_WRAPPER_OBJECT(TEST_OBJECT_UT_ALLOC_HANDLE, TEST_OBJECT_HANDLE_INTERFACES);
+DEFINE_COM_WRAPPER_OBJECT_WITH_MALLOC_FUNCTIONS(TEST_OBJECT_UT_ALLOC_HANDLE, ut_custom_malloc, ut_custom_free, TEST_OBJECT_HANDLE_INTERFACES);
+
 typedef struct TEST_OBJECT_TAG
 {
     int dummy;
@@ -58,6 +81,8 @@ TEST_SUITE_INITIALIZE(suite_init)
 
     REGISTER_GBALLOC_HL_GLOBAL_MOCK_HOOK();
     REGISTER_TEST_OBJECT_GLOBAL_MOCK_HOOK();
+    REGISTER_GLOBAL_MOCK_HOOK(ut_custom_malloc, ut_custom_malloc_hook);
+    REGISTER_GLOBAL_MOCK_HOOK(ut_custom_free, ut_custom_free_hook);
 }
 
 TEST_SUITE_CLEANUP(suite_cleanup)
@@ -70,6 +95,7 @@ TEST_SUITE_CLEANUP(suite_cleanup)
 TEST_FUNCTION_INITIALIZE(method_init)
 {
     umock_c_reset_all_calls();
+    g_ut_custom_alloc_ptr = NULL;
 }
 
 TEST_FUNCTION_CLEANUP(method_cleanup)
@@ -180,21 +206,25 @@ TEST_FUNCTION(create_with_custom_allocator_uses_provided_functions)
 {
     // arrange
     TEST_OBJECT_HANDLE test_object = test_object_create("haga");
-    com_wrapper_ut_reset_custom_alloc_counters();
+    g_ut_custom_alloc_ptr = NULL;
     umock_c_reset_all_calls();
 
+    STRICT_EXPECTED_CALL(ut_custom_malloc(sizeof(TEST_OBJECT_UT_ALLOC_HANDLE_COM_WRAPPER)));
+
     // act
-    ITestInterface* custom_interface = COM_WRAPPER_CREATE(TEST_OBJECT_CUSTOM_ALLOC_HANDLE, ITestInterface, (TEST_OBJECT_CUSTOM_ALLOC_HANDLE)test_object, test_object_destroy);
+    ITestInterface* custom_interface = COM_WRAPPER_CREATE(TEST_OBJECT_UT_ALLOC_HANDLE, ITestInterface, (TEST_OBJECT_UT_ALLOC_HANDLE)test_object, test_object_destroy);
 
     // assert
     ASSERT_IS_NOT_NULL(custom_interface);
-    ASSERT_ARE_EQUAL(size_t, 1, com_wrapper_ut_get_custom_malloc_call_count());
-    ASSERT_ARE_EQUAL(size_t, 0, com_wrapper_ut_get_custom_free_call_count());
+    ASSERT_IS_NOT_NULL(g_ut_custom_alloc_ptr);
 
-    // cleanup
+    STRICT_EXPECTED_CALL(test_object_destroy(test_object));
+    STRICT_EXPECTED_CALL(ut_custom_free(IGNORED_ARG));
+
     (void)custom_interface->lpVtbl->Release(custom_interface);
-    ASSERT_ARE_EQUAL(size_t, 1, com_wrapper_ut_get_custom_malloc_call_count());
-    ASSERT_ARE_EQUAL(size_t, 1, com_wrapper_ut_get_custom_free_call_count());
+
+    ASSERT_IS_NULL(g_ut_custom_alloc_ptr);
+    ASSERT_ARE_EQUAL(char_ptr, umock_c_get_expected_calls(), umock_c_get_actual_calls());
 }
 
 /* QueryInterface */
