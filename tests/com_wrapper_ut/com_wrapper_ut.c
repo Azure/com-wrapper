@@ -1,18 +1,15 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
+// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 #include "com_wrapper_ut_pch.h"
 
 #undef ENABLE_MOCKS_DECL
-#define ENABLE_MOCKS
-#include "umock_c/umock_c_prod.h"
+#include "umock_c/umock_c_ENABLE_MOCKS.h" // ============================== ENABLE_MOCKS
 
 MOCKABLE_FUNCTION(, void*, ut_custom_malloc, size_t, size);
 MOCKABLE_FUNCTION(, void, ut_custom_free, void*, ptr);
 
-#undef ENABLE_MOCKS
-
-#include "umock_c/umock_c_prod.h"
+#include "umock_c/umock_c_DISABLE_MOCKS.h" // ============================== DISABLE_MOCKS
 
 static REFIID iid_IUnknown = &IID_IUnknown;
 static REFIID iid_ITestInterface = &IID_ITestInterface;
