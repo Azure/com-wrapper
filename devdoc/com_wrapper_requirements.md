@@ -111,7 +111,7 @@ Arguments:
 
 - `...` represents a list of interfaces that the COM wrapper implements. Each element in the list has to be constructed with `COM_WRAPPER_INTERFACE`.
 
-**SRS_COM_WRAPPER_01_027: [** `DEFINE_COM_WRAPPER_OBJECT` shall generate constructor prototypes for the COM object for each implemented interface. **]**
+**SRS_COM_WRAPPER_01_027: [** `DECLARE_COM_WRAPPER_OBJECT` shall generate constructor prototypes for the COM object for each implemented interface. **]**
 
 ### DEFINE_COM_WRAPPER_OBJECT
 

@@ -176,7 +176,7 @@ typedef void (*COM_WRAPPER_FREE_FUNCTION)(void* ptr);
 #define DECLARE_COM_WRAPPER_IF(wrapped_handle_type, the_interface) \
     ACTUAL_DECLARE_COM_WRAPPER_IF(wrapped_handle_type, MU_C2(EXTRACT_INTERFACE_NAME_ARG_, the_interface))
 
-/* Codes_SRS_COM_WRAPPER_01_027: [ DEFINE_COM_WRAPPER_OBJECT shall generate constructor prototypes for the COM object for each implemented interface. ]*/
+/* Codes_SRS_COM_WRAPPER_01_027: [ DECLARE_COM_WRAPPER_OBJECT shall generate constructor prototypes for the COM object for each implemented interface. ]*/
 #define DECLARE_COM_WRAPPER_OBJECT(wrapped_handle_type, ...) \
     typedef void (*MU_C2(wrapped_handle_type, _DESTROY_FUNC))(wrapped_handle_type wrapped_handle); \
     MU_FOR_EACH_1_KEEP_1(DECLARE_COM_WRAPPER_IF, wrapped_handle_type, __VA_ARGS__) \
