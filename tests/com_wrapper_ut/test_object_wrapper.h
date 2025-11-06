@@ -3,12 +3,13 @@
 #ifndef TEST_OBJECT_WRAPPER_H
 #define TEST_OBJECT_WRAPPER_H
 
-#include "test_object.h"
-#include "com_wrapper/com_wrapper.h"
-
-
 #include "Unknwnbase.h"
 #include "windows.h"
+
+#include "com_wrapper/com_wrapper.h"
+
+#include "test_object.h"
+
 #include "test_interface.h"
 
 #define TEST_OBJECT_HANDLE_INTERFACES \
