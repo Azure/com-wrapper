@@ -49,21 +49,21 @@
 #define __ITestInterface_FWD_DEFINED__
 typedef interface ITestInterface ITestInterface;
 
-#endif 	/* __ITestInterface_FWD_DEFINED__ */
+#endif     /* __ITestInterface_FWD_DEFINED__ */
 
 
 #ifndef __ITestInterface2_FWD_DEFINED__
 #define __ITestInterface2_FWD_DEFINED__
 typedef interface ITestInterface2 ITestInterface2;
 
-#endif 	/* __ITestInterface2_FWD_DEFINED__ */
+#endif     /* __ITestInterface2_FWD_DEFINED__ */
 
 
 #ifndef __ITestInterfaceNotImpl_FWD_DEFINED__
 #define __ITestInterfaceNotImpl_FWD_DEFINED__
 typedef interface ITestInterfaceNotImpl ITestInterfaceNotImpl;
 
-#endif 	/* __ITestInterfaceNotImpl_FWD_DEFINED__ */
+#endif     /* __ITestInterfaceNotImpl_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -115,7 +115,7 @@ EXTERN_C const IID IID_ITestInterface;
     };
     
     
-#else 	/* C style interface */
+#else     /* C style interface */
 
     typedef struct ITestInterfaceVtbl
     {
@@ -162,37 +162,37 @@ EXTERN_C const IID IID_ITestInterface;
 #ifdef COBJMACROS
 
 
-#define ITestInterface_QueryInterface(This,riid,ppvObject)	\
+#define ITestInterface_QueryInterface(This,riid,ppvObject)    \
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define ITestInterface_AddRef(This)	\
+#define ITestInterface_AddRef(This)    \
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define ITestInterface_Release(This)	\
+#define ITestInterface_Release(This)    \
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define ITestInterface_TestMethodWithReturnNoArgs(This)	\
+#define ITestInterface_TestMethodWithReturnNoArgs(This)    \
     ( (This)->lpVtbl -> TestMethodWithReturnNoArgs(This) ) 
 
-#define ITestInterface_TestMethodWithoutReturnNoArgs(This)	\
+#define ITestInterface_TestMethodWithoutReturnNoArgs(This)    \
     ( (This)->lpVtbl -> TestMethodWithoutReturnNoArgs(This) ) 
 
-#define ITestInterface_TestMethodWithoutReturnWith2Args(This,a,b)	\
+#define ITestInterface_TestMethodWithoutReturnWith2Args(This,a,b)    \
     ( (This)->lpVtbl -> TestMethodWithoutReturnWith2Args(This,a,b) ) 
 
-#define ITestInterface_TestMethodWithReturnWith2Args(This,a,b)	\
+#define ITestInterface_TestMethodWithReturnWith2Args(This,a,b)    \
     ( (This)->lpVtbl -> TestMethodWithReturnWith2Args(This,a,b) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif 	/* C style interface */
+#endif     /* C style interface */
 
 
 
 
-#endif 	/* __ITestInterface_INTERFACE_DEFINED__ */
+#endif     /* __ITestInterface_INTERFACE_DEFINED__ */
 
 
 #ifndef __ITestInterface2_INTERFACE_DEFINED__
@@ -216,7 +216,7 @@ EXTERN_C const IID IID_ITestInterface2;
     };
     
     
-#else 	/* C style interface */
+#else     /* C style interface */
 
     typedef struct ITestInterface2Vtbl
     {
@@ -251,28 +251,28 @@ EXTERN_C const IID IID_ITestInterface2;
 #ifdef COBJMACROS
 
 
-#define ITestInterface2_QueryInterface(This,riid,ppvObject)	\
+#define ITestInterface2_QueryInterface(This,riid,ppvObject)    \
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define ITestInterface2_AddRef(This)	\
+#define ITestInterface2_AddRef(This)    \
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define ITestInterface2_Release(This)	\
+#define ITestInterface2_Release(This)    \
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define ITestInterface2_TestMethodInterface2(This,x)	\
+#define ITestInterface2_TestMethodInterface2(This,x)    \
     ( (This)->lpVtbl -> TestMethodInterface2(This,x) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif 	/* C style interface */
+#endif     /* C style interface */
 
 
 
 
-#endif 	/* __ITestInterface2_INTERFACE_DEFINED__ */
+#endif     /* __ITestInterface2_INTERFACE_DEFINED__ */
 
 
 #ifndef __ITestInterfaceNotImpl_INTERFACE_DEFINED__
@@ -295,7 +295,7 @@ EXTERN_C const IID IID_ITestInterfaceNotImpl;
     };
     
     
-#else 	/* C style interface */
+#else     /* C style interface */
 
     typedef struct ITestInterfaceNotImplVtbl
     {
@@ -329,28 +329,28 @@ EXTERN_C const IID IID_ITestInterfaceNotImpl;
 #ifdef COBJMACROS
 
 
-#define ITestInterfaceNotImpl_QueryInterface(This,riid,ppvObject)	\
+#define ITestInterfaceNotImpl_QueryInterface(This,riid,ppvObject)    \
     ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
-#define ITestInterfaceNotImpl_AddRef(This)	\
+#define ITestInterfaceNotImpl_AddRef(This)    \
     ( (This)->lpVtbl -> AddRef(This) ) 
 
-#define ITestInterfaceNotImpl_Release(This)	\
+#define ITestInterfaceNotImpl_Release(This)    \
     ( (This)->lpVtbl -> Release(This) ) 
 
 
-#define ITestInterfaceNotImpl_TestMethodNotImplemented(This)	\
+#define ITestInterfaceNotImpl_TestMethodNotImplemented(This)    \
     ( (This)->lpVtbl -> TestMethodNotImplemented(This) ) 
 
 #endif /* COBJMACROS */
 
 
-#endif 	/* C style interface */
+#endif     /* C style interface */
 
 
 
 
-#endif 	/* __ITestInterfaceNotImpl_INTERFACE_DEFINED__ */
+#endif     /* __ITestInterfaceNotImpl_INTERFACE_DEFINED__ */
 
 
 /* Additional Prototypes for ALL interfaces */
