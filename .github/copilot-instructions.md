@@ -3,6 +3,17 @@
 ## Project Overview
 com-wrapper is a C library that provides a COM (Component Object Model) wrapper framework for binding COM interfaces to C pseudo-object handles. It enables wrapping C handle-based objects with COM interface implementations, allowing seamless integration between C code and COM-based systems.
 
+## External Dependencies and Standards
+All code must follow the comprehensive coding standards defined in #file:../deps/c-build-tools/.github/general_coding_instructions.md. For detailed patterns and conventions, refer to dependency-specific instructions:
+
+- **Build Infrastructure**: #file:../deps/c-build-tools/.github/copilot-instructions.md
+- **Macro Utilities**: #file:../deps/macro-utils-c/.github/copilot-instructions.md
+- **Logging Framework**: #file:../deps/c-logging/.github/copilot-instructions.md
+- **Platform Abstraction**: #file:../deps/c-pal/.github/copilot-instructions.md
+- **Test Framework**: #file:../deps/ctest/.github/copilot-instructions.md
+- **Test Runner**: #file:../deps/c-testrunnerswitcher/.github/copilot-instructions.md
+- **Mocking Framework**: #file:../deps/umock-c/.github/copilot-instructions.md
+
 ## Architecture & Core Concepts
 
 ### COM Wrapper System
@@ -242,14 +253,14 @@ COM_WRAPPER_FUNCTION_WRAPPER(int, handle_complex_method, void*, buffer, SIZE_T, 
 
 ### Dependency References
 For comprehensive patterns, refer to dependency-specific instructions:
-- **c-build-tools**: Build infrastructure and coding standards (`deps/c-build-tools/.github/copilot-instructions.md`)
-- **macro-utils-c**: Advanced macro metaprogramming techniques (`deps/macro-utils-c/.github/copilot-instructions.md`)
-- **umock-c**: C mocking framework for COM interface testing (`deps/umock-c/.github/copilot-instructions.md`)
-- **c-pal**: Platform abstraction and memory management (`deps/c-pal/.github/copilot-instructions.md`)
-- **c-logging**: Structured logging for debugging and tracing (`deps/c-logging/.github/copilot-instructions.md`)
+- **c-build-tools**: Build infrastructure and coding standards (#file:../deps/c-build-tools/.github/copilot-instructions.md)
+- **macro-utils-c**: Advanced macro metaprogramming techniques (#file:../deps/macro-utils-c/.github/copilot-instructions.md)
+- **umock-c**: C mocking framework for COM interface testing (#file:../deps/umock-c/.github/copilot-instructions.md)
+- **c-pal**: Platform abstraction and memory management (#file:../deps/c-pal/.github/copilot-instructions.md)
+- **c-logging**: Structured logging for debugging and tracing (#file:../deps/c-logging/.github/copilot-instructions.md)
 
 ### Coding Standards Compliance
-**CRITICAL**: All code changes must follow comprehensive standards in `deps/c-build-tools/.github/general_coding_instructions.md`:
+**CRITICAL**: All code changes must follow comprehensive standards in #file:../deps/c-build-tools/.github/general_coding_instructions.md:
 - **Function naming**: snake_case with `com_wrapper_` prefix for internal functions
 - **Parameter validation**: COM methods validate parameters and return appropriate HRESULTs
 - **Header inclusion order**: Standard C headers, Windows COM headers, infrastructure headers, project headers
