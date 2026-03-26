@@ -4,9 +4,10 @@
 com-wrapper is a C library that provides a COM (Component Object Model) wrapper framework for binding COM interfaces to C pseudo-object handles. It enables wrapping C handle-based objects with COM interface implementations, allowing seamless integration between C code and COM-based systems.
 
 ## External Dependencies and Standards
-All code must follow the comprehensive coding standards defined in #file:../deps/c-build-tools/.github/general_coding_instructions.md. For detailed patterns and conventions, refer to dependency-specific instructions:
+All code must follow the comprehensive coding standards defined in #file:../deps/azure-messaging-ai-context/.github/general_coding_instructions.md. For detailed patterns and conventions, refer to dependency-specific instructions:
 
 - **Build Infrastructure**: #file:../deps/c-build-tools/.github/copilot-instructions.md
+- **AI Context & Coding Standards**: #file:../deps/azure-messaging-ai-context/.github/copilot-instructions.md (git conventions, terminal rules, agent skills)
 - **Macro Utilities**: #file:../deps/macro-utils-c/.github/copilot-instructions.md
 - **Logging Framework**: #file:../deps/c-logging/.github/copilot-instructions.md
 - **Platform Abstraction**: #file:../deps/c-pal/.github/copilot-instructions.md
@@ -260,7 +261,7 @@ For comprehensive patterns, refer to dependency-specific instructions:
 - **c-logging**: Structured logging for debugging and tracing (#file:../deps/c-logging/.github/copilot-instructions.md)
 
 ### Coding Standards Compliance
-**CRITICAL**: All code changes must follow comprehensive standards in #file:../deps/c-build-tools/.github/general_coding_instructions.md:
+**CRITICAL**: All code changes must follow comprehensive standards in #file:../deps/azure-messaging-ai-context/.github/general_coding_instructions.md:
 - **Function naming**: snake_case with `com_wrapper_` prefix for internal functions
 - **Parameter validation**: COM methods validate parameters and return appropriate HRESULTs
 - **Header inclusion order**: Standard C headers, Windows COM headers, infrastructure headers, project headers
