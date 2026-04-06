@@ -1,4 +1,19 @@
 name: $(BuildID)_$(BuildDefinitionName)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+
+parameters:
+  - name: pool_name_windows_x64
+    displayName: 'Windows x64 Pool'
+    type: string
+    default: 'Azure-MessagingStore-WinBuildPoolVS2022_1'
+  - name: pool_name_windows_arm64
+    displayName: 'Windows ARM64 Pool'
+    type: string
+    default: 'Azure-MessagingStore-Win-ARM64-Dpldsv6-v01'
+  - name: pool_name_linux
+    displayName: 'Linux Pool'
+    type: string
+    default: 'Azure-MsgStore-Linux2204BuildMachinePool'
+
 resources:
   repositories:
   - repository: self
@@ -7,7 +22,8 @@ resources:
     type: github
     name: azure/c-build-tools
     endpoint: github.com_azure
-    ref: 5164af011bd68b6166b3ef1d5b4b33443dfea23a
+    ref: 29cadd720b38796d37fda89cc8191438bf32494b
+
 jobs:
 - template: /pipeline_templates/build_all_flavors.yml@c_build_tools
   parameters:
@@ -16,6 +32,8 @@ jobs:
 - template: /pipeline_templates/run_master_check.yml@c_build_tools
 
 - template: /pipeline_templates/codeql3000_default.yml@c_build_tools
+  pool: 
+    name: Azure-MessagingStore-Win-x64-Dadsv7-v03
 
 # Will be re-enabled at a later time
 #- job: includecheck
