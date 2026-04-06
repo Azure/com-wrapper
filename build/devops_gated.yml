@@ -32,8 +32,9 @@ jobs:
 - template: /pipeline_templates/run_master_check.yml@c_build_tools
 
 - template: /pipeline_templates/codeql3000_default.yml@c_build_tools
-  pool: 
-    name: Azure-MessagingStore-Win-x64-Dadsv7-v03
+  parameters:
+    pool: 
+      name: Azure-MessagingStore-Win-x64-Dadsv7-v03
 
 # Will be re-enabled at a later time
 #- job: includecheck
