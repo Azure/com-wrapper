@@ -549,7 +549,7 @@ TEST_FUNCTION(Release_with_custom_allocator_uses_custom_free)
 
 /* COM_WRAPPER_FUNCTION_WRAPPER */
 
-/* Tests_SRS_COM_WRAPPER_01_020: [ The macro shall generate a wrapper function that looks like: ... ]*/
+/* Tests_SRS_COM_WRAPPER_01_020: [ The macro shall generate a wrapper function that looks like: ]*/
 /* Tests_SRS_COM_WRAPPER_01_021: [ If This is NULL, the wrapper shall return without calling the underlying wrapper. ]*/
 TEST_FUNCTION(COM_WRAPPER_FUNCTION_WRAPPER_generated_wrapper_with_NULL_This_fails)
 {
