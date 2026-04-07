@@ -269,12 +269,11 @@ Arguments:
 
 - `...` is made of pairs of `(arg_type, arg_name)` which represent the arguments of the function.
 
-**SRS_COM_WRAPPER_01_020: [** The macro shall generate a wrapper function that looks like:
+**SRS_COM_WRAPPER_01_020: [** The macro shall generate a wrapper function that looks like: **]**
 
 ```c
 return_type STDMETHODCALLTYPE name(implementing_interface* This, arg1_type arg1, arg2_type arg2, ...)
 ```
- **]**
 
 **SRS_COM_WRAPPER_01_021: [** If `This` is NULL, the wrapper shall return without calling the underlying wrapper. **]**
 
