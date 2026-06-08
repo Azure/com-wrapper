@@ -22,12 +22,13 @@ resources:
     type: github
     name: azure/c-build-tools
     endpoint: github.com_azure
-    ref: e5e02dd2ad4b7902bc9cddd2c4a97f41fb1060b7
+    ref: 612568af16b25422d82b634d267bd4b7d6ab5dd1
 
 jobs:
 - template: /pipeline_templates/build_all_flavors.yml@c_build_tools
   parameters:
     GBALLOC_LL_TYPE_VALUES: ["PASSTHROUGH", "JEMALLOC"]
+    arm64_max_stage: ALL
 
 - template: /pipeline_templates/run_master_check.yml@c_build_tools
 
