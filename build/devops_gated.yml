@@ -32,6 +32,8 @@ jobs:
     arm64_max_stage: ALL
 
 - template: /pipeline_templates/run_master_check.yml@c_build_tools
+  parameters:
+    pool_name: ${{ parameters.pool_name_windows_x64 }}
 
 - template: /pipeline_templates/codeql3000_default.yml@c_build_tools
   parameters:
